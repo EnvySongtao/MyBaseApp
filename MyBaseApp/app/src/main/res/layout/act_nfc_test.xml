@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteY="25dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <EditText
+        android:id="@+id/readEdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="读的输入？"
+        android:padding="20dp"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <EditText
+        android:id="@+id/writeEdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="写的输入？"
+        android:padding="20dp"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <EditText
+        android:id="@+id/sectorNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="写入的扇区"
+        android:padding="20dp"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <EditText
+        android:id="@+id/blockNum"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="写入的块区"
+        android:padding="20dp"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:id="@+id/readData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="读出的数据"
+        android:textSize="18sp" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:id="@+id/tv_show3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#9999FF"
+        android:padding="20dp"
+        android:text="Hello World!"
+        android:textSize="18sp" />
+
+</LinearLayout>
