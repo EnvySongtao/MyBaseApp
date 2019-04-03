@@ -3,4 +3,23 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+
+    <color name="primary_color_text_black">#323232</color>
+    <color name="primary_color_text_blue">#0485d0</color>
+    <color name="primary_color_text_gray">#808080</color>
+    <color name="primary_color_text_hint">#BDC1C0</color>
+    <color name="primary_color_text_white">#fff3f3f3</color>
+
+
+    <color name="primary_color_line">#E6E6E6</color>
+    <color name="primary_color_bg">#f7f7f7</color>
+    <color name="primary_color_blue">#0385D1</color>
+    <color name="primary_color_blue_press">#0464FF</color>
+    <color name="primary_color_white">#ffffff</color>
+    <color name="primary_color_gray">#808080</color>
+    <color name="primary_color_red">#FF0000</color>
+    <color name="primary_color_black">#000000</color>
+    <color name="primary_color_transparent">#00000000</color>
+    <color name="primary_color_green_wechat">#01bd5e</color>
 </resources>

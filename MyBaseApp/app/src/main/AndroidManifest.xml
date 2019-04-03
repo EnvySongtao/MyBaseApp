@@ -2,22 +2,35 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gst.mybaseapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
     <!-- 要求当前设备必须要有NFC芯片 start-->
     <uses-permission android:name="android.permission.NFC" />
-    <uses-feature android:name="android.hardware.nfc" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.nfc"
+        android:required="true" />
     <!-- 要求当前设备必须要有NFC芯片 end-->
 
     <!-- 要求当前设备必须要有蓝牙权限 start-->
-    <uses-permission android:name= "android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name= "android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
     <!-- 要求当前设备必须要有蓝牙权限 start-->
+
+
+    <uses-permission android:name="android.permission.READ_LOGS" /> <!-- 读取短信的权限 -->
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.GET_TASKS" /> <!-- 解决部分手机不能分享时无法调起微信的问题 -->
+    <uses-permission android:name="android.permission.WRITE_APN_SETTINGS" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <application
         android:name=".base.MyApp"
         android:allowBackup="true"
@@ -26,17 +39,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.NfcAct"
+
+        <!--android:name=".ui.nfc.NfcAct"-->
+        <activity
+            android:name=".ui.MainActivity"
             android:configChanges="keyboard"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <!--<activity android:name=".ui.NfcAct"-->
-            <!--android:launchMode="singleTop"/>-->
+        <!--android:launchMode="singleTop"/>-->
+
+        <!-- 如果您项目中的所有页面都只需要以高或宽中的一个作为基准进行适配的话, 那就只需要填写高或宽中的一个设计图尺寸即可 -->
+        <meta-data
+            android:name="design_width_in_dp"
+            android:value="320" />
+        <meta-data
+            android:name="design_height_in_dp"
+            android:value="640" />
     </application>
 
 </manifest>

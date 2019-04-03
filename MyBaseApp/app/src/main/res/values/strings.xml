@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">MyBaseApp</string>
+
+
+    <string name="loading_view_normal_msg">请耐心等待...</string>
+    <string name="qh_dialog_title">提示</string>
+    <string name="qh_dialog_ok">确定</string>
+    <string name="qh_dialog_cancel">取消</string>
+    <string name="choose_device_sure">确定</string>
+    <string name="choose_enchashment_way_sure">确认</string>
+    <string name="qh_dialog_receipt_continue">继续交易</string>
+    <string name="qh_dialog_receipt_cancle">取消交易</string>
+    <string name="trans_detail">交易明细</string>
+
+
+    <!--权限提示 start-->
+    <string name="no_permission_camera">无摄像头权限，将无法进行拍照！需要您前去打开权限。</string>
+    <string name="no_permission_write_external_storage">无读写文件权限，将无法存储文件！需要您前去打开权限。</string>
+    <string name="no_permission_write_external_storage_photo">无读写文件权限，将无法存储照片！需要您前去打开权限。</string>
+    <string name="no_permission_blutooth_and_auto">无蓝牙、定位和音频(录音)权限，将无法连接机具！需要您前去打开权限。</string>
+    <string name="no_permission_blutooth">无定位和蓝牙权限，或未打开蓝牙，将无法连接蓝牙机具！需要您前去打开。</string>
+    <string name="no_permission_loaction_and_phone_state">无定位或获取手机信息权限，将无法正常交易！需要您前去打开权限。</string>
+    <string name="no_permission_phone_state">无获取手机信息权限，将无法正常交易！需要您前去打开权限。</string>
+    <string name="no_permission_loaction">无定位或获取手机信息权限，将无法正常交易！需要您前去打开权限。</string>
+    <!--权限提示 end-->
 </resources>

@@ -23,18 +23,17 @@ android {
     }
 }
 
-
 //Android中导入依赖与版本不和的解决办法
-//configurations.all {
-//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-//        def requested = details.requested
-//        if (requested.group == 'com.android.support') {
-//            if (!requested.name.startsWith("multidex")) {
-//                details.useVersion '26.1.0'//28.0.3
-//            }
-//        }
-//    }
-//}
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '25.2.0'//28.0.3
+            }
+        }
+    }
+}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -58,4 +57,9 @@ dependencies {
     //方法数多于 56K
     implementation 'com.android.support:multidex:1.0.3'
     implementation files('libs/BASE64.jar')
+    //自动适配屏幕
+    implementation 'me.jessyan:autosize:1.1.2'
+    implementation project(':cameraLib')
+    //动画框架
+    //implementation 'com.airbnb.android:lottie:3.0.0'
 }

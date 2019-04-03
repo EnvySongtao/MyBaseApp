@@ -3,7 +3,7 @@ package com.gst.mybaseapp.net;
 import android.os.Build;
 import android.util.Log;
 
-import com.gst.mybaseapp.config.AppConfig;
+import com.gst.mybaseapp.base.AppConfig;
 import com.gst.mybaseapp.net.framework.OkHttp3Helper;
 import com.gst.mybaseapp.net.interfaces.NetHelperInterface;
 

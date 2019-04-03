@@ -1,20 +1,24 @@
-package com.gst.mybaseapp;
+package com.gst.mybaseapp.ui;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationSet;
 import android.widget.TextView;
 
+import com.gst.mybaseapp.R;
+import com.gst.mybaseapp.base.AppConfig;
+import com.gst.mybaseapp.base.BaseActivity;
 import com.gst.mybaseapp.been.ShortUrl;
-import com.gst.mybaseapp.config.AppConfig;
+import com.gst.mybaseapp.customView.LoadingView;
 import com.gst.mybaseapp.net.AccountNetManager;
 import com.gst.mybaseapp.net.AccountNetManagerImpl;
+import com.gst.mybaseapp.net.interfaces.NetHelperInterface;
+import com.gst.mybaseapp.utils.AnimationUtil;
 import com.gst.mybaseapp.utils.DeviceUtil;
 import com.gst.mybaseapp.utils.JsonUtil;
 import com.gst.mybaseapp.utils.NetHelper;
-import com.gst.mybaseapp.net.interfaces.NetHelperInterface;
 import com.gst.mybaseapp.utils.StringUtils;
 
 import org.json.JSONException;
@@ -23,7 +27,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private String customerId = "";
 
@@ -31,19 +35,72 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        testNetwork();
+//        testNetwork();
+        testAnim();
         Log.i(TAG, "onCreate: ");
     }
 
+
+    private void testAnim() {
+        TextView tv_show = (TextView) findViewById(R.id.tv_show);
+        TextView tv_show1 = (TextView) findViewById(R.id.tv_show1);
+        TextView tv_show2 = (TextView) findViewById(R.id.tv_show2);
+        TextView tv_show3 = (TextView) findViewById(R.id.tv_show3);
+        TextView tv_show4 = (TextView) findViewById(R.id.tv_show4);
+        tv_show.setText("executeAllAnimations");
+        tv_show1.setText("translateX");
+        tv_show2.setText("leftIn");
+        tv_show3.setText("waitingOut");
+        tv_show4.setText("push_bottom_out");
+
+        tv_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimationUtil.executeAllAnimations(v, 0.2F, 1F);
+            }
+        });
+
+        tv_show1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimationUtil.translateX(v);
+            }
+        });
+
+        tv_show2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimationUtil.leftIn(v);
+            }
+        });
+
+
+        tv_show3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimationUtil.waitingOut(v);
+            }
+        });
+
+        tv_show4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AnimationUtil.push_bottom_out(v);
+            }
+        });
+    }
+
     private void testNetwork() {
-        TextView tv_show = findViewById(R.id.tv_show);
-        TextView tv_show1 = findViewById(R.id.tv_show1);
-        TextView tv_show2 = findViewById(R.id.tv_show2);
-        TextView tv_show3 = findViewById(R.id.tv_show3);
+        TextView tv_show = (TextView) findViewById(R.id.tv_show);
+        TextView tv_show1 = (TextView) findViewById(R.id.tv_show1);
+        TextView tv_show2 = (TextView) findViewById(R.id.tv_show2);
+        TextView tv_show3 = (TextView) findViewById(R.id.tv_show3);
+        TextView tv_show4 = (TextView) findViewById(R.id.tv_show4);
         tv_show.setText("queryGet");
         tv_show1.setText("getAppversion");
         tv_show2.setText("login");
         tv_show3.setText("getFxFldata");
+        tv_show4.setText("loadingView");
 
         tv_show.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AccountNetManagerImpl accountNetManager = new AccountNetManager();
-                AppConfig.IP=DeviceUtil.getLocalIpAddress();
+                AppConfig.IP = DeviceUtil.getLocalIpAddress();
                 accountNetManager.login("13219205186", "q1234567", new NetHelperInterface.OnResponseListener() {
                     @Override
                     public void onResponse(int status, boolean isSuccess, String result, String msg) {
@@ -113,6 +170,13 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("MainActivity", "result=" + result);
                     }
                 });
+            }
+        });
+
+        tv_show4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LoadingView.show(MainActivity.this, MainActivity.this, "傻眼了吧......");
             }
         });
     }

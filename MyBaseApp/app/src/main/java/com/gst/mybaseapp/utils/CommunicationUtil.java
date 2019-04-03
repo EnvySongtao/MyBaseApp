@@ -7,11 +7,9 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.provider.SyncStateContract;
-import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.gst.mybaseapp.config.AppConfig;
+import com.gst.mybaseapp.base.AppConfig;
 
 import java.io.File;
 import java.util.HashMap;

@@ -8,10 +8,13 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import static com.gst.mybaseapp.net.framework.OkHttp3Helper.JSON;
 
 public class JsonUtil {
 
-    private static Gson mGson =new Gson();
+    private static Gson mGson = new Gson();
 
     /**
      * 不允许外部 new
@@ -47,4 +50,12 @@ public class JsonUtil {
         return item;
     }
 
+
+    public static String toJson(Map map) {
+
+//        map.put("VER", "66");
+
+        return mGson.toJson(map);
+
+    }
 }

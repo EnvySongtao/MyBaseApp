@@ -1,4 +1,4 @@
-package com.gst.mybaseapp.ui;
+package com.gst.mybaseapp.ui.nfc;
 
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -10,13 +10,12 @@ import android.nfc.Tag;
 import android.nfc.tech.MifareClassic;
 import android.nfc.tech.Ndef;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gst.mybaseapp.R;
+import com.gst.mybaseapp.base.BaseActivity;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -26,7 +25,7 @@ import java.util.Locale;
 /**
  * NFC 操作 start  手机没有NFC
  */
-public class NfcAct extends AppCompatActivity {
+public class NfcAct extends BaseActivity {
 
     private NfcAdapter mNfcAdapter;
     private boolean isNfcEnabled = false;
@@ -44,11 +43,11 @@ public class NfcAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_nfc_test);
 
-        readEdt=findViewById(R.id.readEdt);
-        writeEdt=findViewById(R.id.writeEdt);
-        sectorNum=findViewById(R.id.sectorNum);
-        blockNum=findViewById(R.id.blockNum);
-        readData=findViewById(R.id.readData);
+        readEdt= (EditText) findViewById(R.id.readEdt);
+        writeEdt= (EditText) findViewById(R.id.writeEdt);
+        sectorNum= (EditText) findViewById(R.id.sectorNum);
+        blockNum= (EditText) findViewById(R.id.blockNum);
+        readData= (TextView) findViewById(R.id.readData);
     }
 
     @Override

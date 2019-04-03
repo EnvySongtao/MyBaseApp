@@ -5,7 +5,7 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.gst.mybaseapp.config.AppConfig;
+import com.gst.mybaseapp.base.AppConfig;
 import com.gst.mybaseapp.net.MD5;
 import com.gst.mybaseapp.net.TestDES;
 import com.gst.mybaseapp.utils.NetHelper;
