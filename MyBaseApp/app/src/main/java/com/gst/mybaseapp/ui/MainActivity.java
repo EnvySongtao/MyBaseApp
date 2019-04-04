@@ -1,5 +1,6 @@
 package com.gst.mybaseapp.ui;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,6 +12,7 @@ import com.gst.mybaseapp.R;
 import com.gst.mybaseapp.base.AppConfig;
 import com.gst.mybaseapp.base.BaseActivity;
 import com.gst.mybaseapp.been.ShortUrl;
+import com.gst.mybaseapp.customView.CustomerAlertView;
 import com.gst.mybaseapp.customView.LoadingView;
 import com.gst.mybaseapp.net.AccountNetManager;
 import com.gst.mybaseapp.net.AccountNetManagerImpl;
@@ -47,7 +49,10 @@ public class MainActivity extends BaseActivity {
         TextView tv_show2 = (TextView) findViewById(R.id.tv_show2);
         TextView tv_show3 = (TextView) findViewById(R.id.tv_show3);
         TextView tv_show4 = (TextView) findViewById(R.id.tv_show4);
-        tv_show.setText("executeAllAnimations");
+//        tv_show.setText("executeAllAnimations");
+        tv_show.setText("squenceAnimations");
+//        tv_show1.setText("translateX");
+//        tv_show1.setText("squenceAnimByRes");
         tv_show1.setText("translateX");
         tv_show2.setText("leftIn");
         tv_show3.setText("waitingOut");
@@ -56,21 +61,51 @@ public class MainActivity extends BaseActivity {
         tv_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimationUtil.executeAllAnimations(v, 0.2F, 1F);
+                AnimationUtil.squenceAnimations(v);
             }
         });
+//        tv_show1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AnimationUtil.squenceAnimByRes(v);
+//            }
+//        });
+// tv_show.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AnimationUtil.executeAllAnimations(v, 0.2F, 1F);
+//            }
+//        });
 
         tv_show1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimationUtil.translateX(v);
+//                AnimationUtil.translateX(v);
+                AnimationUtil.translateX(v, null);
             }
         });
 
         tv_show2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimationUtil.leftIn(v);
+//                AnimationUtil.leftIn(v);
+                CustomerAlertView alertView = new CustomerAlertView.Builder(MainActivity.this, false, false)
+                        .setTitle("我是标题")
+                        .setMessage("我是内容")
+                        .setNegativeButton("确认", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                            }
+                        })
+                        .create();
+                alertView.show();
             }
         });
 

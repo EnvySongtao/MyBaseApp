@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--android:duration="500"//第一个动画时间500-->
+    <scale
+        android:duration="500"
+        android:fillAfter="true"
+        android:fromXScale="1"
+        android:fromYScale="1"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:toXScale="0.5"
+        android:toYScale="0.5" />
+    <!--ScaleAnimation动画再次变化时 将以变化后的属性为基础再变化
+    android:startOffset="600"//第二个动画延迟600毫秒  中间停100毫秒-->
+    <scale
+        android:duration="1000"
+        android:fillAfter="true"
+        android:fromXScale="1"
+        android:fromYScale="1"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="600"
+        android:toXScale="2.6"
+        android:toYScale="2.6" />
+    <!-- ScaleAnimation动画再次变化时 将以变化后的属性为基础再变化
+    -android:startOffset="1700"  //第二个动画延迟1700毫秒 中间停100毫秒
+    android:duration="1500"//第二个动画时间1500,-->
+    <scale
+        android:duration="500"
+        android:fillAfter="true"
+        android:fromXScale="1"
+        android:fromYScale="1"
+        android:interpolator="@android:anim/accelerate_decelerate_interpolator"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:startOffset="1700"
+        android:toXScale="0.769"
+        android:toYScale="0.769" />
+</set>
