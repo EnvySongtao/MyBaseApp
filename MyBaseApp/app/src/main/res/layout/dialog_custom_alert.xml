@@ -94,7 +94,9 @@
                 android:textColor="@color/primary_color_text_gray"
                 android:textSize="18dp" />
 
-            <View style="@style/common_line_vertical" />
+            <View
+                android:id="@+id/v_btn_div"
+                style="@style/common_line_vertical" />
 
             <TextView
                 android:id="@+id/custom_alert_positive"

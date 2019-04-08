@@ -50,18 +50,26 @@ public class MainActivity extends BaseActivity {
         TextView tv_show3 = (TextView) findViewById(R.id.tv_show3);
         TextView tv_show4 = (TextView) findViewById(R.id.tv_show4);
 //        tv_show.setText("executeAllAnimations");
-        tv_show.setText("squenceAnimations");
+//        tv_show.setText("squenceAnimations");
+//        tv_show.setText("textChangeAnimator");
+//        tv_show.setText("textChangeEvaluator");
+        tv_show.setText("textChangeTimeAnimator");
 //        tv_show1.setText("translateX");
 //        tv_show1.setText("squenceAnimByRes");
-        tv_show1.setText("translateX");
-        tv_show2.setText("leftIn");
+//        tv_show1.setText("testPathObjectAnim");
+        tv_show1.setText("propertyValuesHolder");
+//        tv_show2.setText("leftIn");
+        tv_show2.setText("animatorSet");
         tv_show3.setText("waitingOut");
         tv_show4.setText("push_bottom_out");
 
         tv_show.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AnimationUtil.squenceAnimations(v);
+//                AnimationUtil.squenceAnimations(v);
+//                AnimationUtil.textChangeAnimator((TextView) v);
+//                AnimationUtil.textChangeEvaluator((TextView) v);
+                AnimationUtil.textChangeTimeAnimator((TextView) v);
             }
         });
 //        tv_show1.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +89,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //                AnimationUtil.translateX(v);
-                AnimationUtil.translateX(v, null);
+//                AnimationUtil.translateX(v, null);
+//                AnimationUtil.testTranslationXObjectAnim(v);
+                AnimationUtil.propertyValuesHolder(v);
             }
         });
 
@@ -89,23 +99,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
 //                AnimationUtil.leftIn(v);
-                CustomerAlertView alertView = new CustomerAlertView.Builder(MainActivity.this, false, false)
-                        .setTitle("我是标题")
-                        .setMessage("我是内容")
-                        .setNegativeButton("确认", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        })
-                        .setPositiveButton("取消", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        })
-                        .create();
-                alertView.show();
+                AnimationUtil.animatorSet(v);
             }
         });
 

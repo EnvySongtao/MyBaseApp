@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.gst.mybaseapp.R;
+import com.gst.mybaseapp.ui.MainActivity;
 
 
 /**
@@ -48,12 +49,13 @@ public class CustomerAlertView extends Dialog {
         private SpannableString spStr;
 
 
+        private View vBtnDiv;
         private TextView titleView;
         private TextView messageView;
         private TextView positiveButton;
         private TextView negativeButton;
         private ImageView messageImgView;
-//        private EditText mInputMsgEt;//输入框
+        //        private EditText mInputMsgEt;//输入框
 //        private LinearLayout mInputMsgLl;//输入框布局
         private LinearLayout mMsgLl;//提示内容布局
 
@@ -221,8 +223,7 @@ public class CustomerAlertView extends Dialog {
          * @return
          */
         public Builder setPositiveButton(int positiveButtonText, OnClickListener listener) {
-            this.positiveButtonText = (String) context
-                    .getText(positiveButtonText);
+            this.positiveButtonText = (String) context.getText(positiveButtonText);
             this.positiveButtonClickListener = listener;
             return this;
         }
@@ -284,6 +285,7 @@ public class CustomerAlertView extends Dialog {
             titleView = (TextView) layout.findViewById(R.id.custom_alert_title);
             messageView = (TextView) layout.findViewById(R.id.custom_alert_content);
             messageImgView = (ImageView) layout.findViewById(R.id.custom_alert_img);
+            vBtnDiv = layout.findViewById(R.id.v_btn_div);
             setMessageAlignment(leftAlignment);
             mMsgLl = (LinearLayout) layout.findViewById(R.id.ll_custom_alert_content);//提示内容布局
 //            mInputMsgEt = (EditText) layout.findViewById(R.id.et_input);//输入框
@@ -298,7 +300,9 @@ public class CustomerAlertView extends Dialog {
                 titleView.setText(title);
             }
             // set the confirm button
+            boolean needBtnDiv = true;
             if (positiveButtonText != null) {
+                needBtnDiv = false;
                 positiveButton.setText(positiveButtonText);
                 if (positiveButtonClickListener != null) {
                     positiveButton
@@ -314,6 +318,7 @@ public class CustomerAlertView extends Dialog {
             }
 
             if (negativeButtonText != null) {
+                needBtnDiv = false;
                 negativeButton.setText(negativeButtonText);
                 if (negativeButtonClickListener != null) {
                     negativeButton
@@ -326,6 +331,12 @@ public class CustomerAlertView extends Dialog {
                 }
             } else {
                 negativeButton.setVisibility(View.GONE);
+            }
+
+            if (needBtnDiv) {
+                vBtnDiv.setVisibility(View.VISIBLE);
+            } else {
+                vBtnDiv.setVisibility(View.GONE);
             }
             // set the content message
             if (message != null) {
@@ -377,5 +388,29 @@ public class CustomerAlertView extends Dialog {
         public void setLeftAlignment(boolean leftAlignment) {
             this.leftAlignment = leftAlignment;
         }
+    }
+
+    /**
+     * 测试dialog
+     * @param context
+     */
+    public static void testDialog(Context context) {
+        CustomerAlertView alertView = new CustomerAlertView.Builder(context, false, false)
+                .setTitle("我是标题")
+                .setMessage("我是内容")
+                .setNegativeButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+//                        .setPositiveButton("取消", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                dialogInterface.dismiss();
+//                            }
+//                        })
+                .create();
+        alertView.show();
     }
 }

@@ -1,8 +1,17 @@
 package com.gst.mybaseapp.utils;
 
+import android.animation.AnimatorSet;
+import android.animation.IntEvaluator;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.TimeAnimator;
+import android.animation.ValueAnimator;
+import android.annotation.TargetApi;
 import android.graphics.Path;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Build;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -10,15 +19,18 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
-import android.view.animation.PathInterpolator;
 import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.gst.mybaseapp.R;
 import com.gst.mybaseapp.base.MyApp;
 
 /**
+ * animation为视图动画，视图效果变化的动画
+ * animator为属性动画，即动画完成后，View的属性也会发生变化
  * 注意  overridePendingTransition(R.anim.slide_in_top, R.anim.slide_in_top); 只支持资源文件动画
  * author: GuoSongtao on 2019/4/3 17:17
  * email: 157010607@qq.com
@@ -148,6 +160,27 @@ public class AnimationUtil {
         view.startAnimation(animationSet);
     }
 
+    /**
+     * animatorSet的使用 注意区分 animationSet
+     * 下面两句话原理 先执行a3，然后在同时执行a1和a2
+     * animSet.playTogether(a2,a1);//两个动画同时执行
+     * animSet.play(a3).before(a2); //先后执行
+     *
+     * @param view
+     */
+    public static void animatorSet(View view) {
+        ObjectAnimator a1 = ObjectAnimator.ofFloat(view, "alpha", 1.0f, 0f, 1.0f);
+        ObjectAnimator a2 = ObjectAnimator.ofFloat(view, "translationX", 0f, -50, 0f);
+        ObjectAnimator a3 = ObjectAnimator.ofFloat(view, "scaleY", 1, 0.5F, 1);
+        AnimatorSet animSet = new AnimatorSet();
+        animSet.setDuration(3000);
+        animSet.setInterpolator(new LinearInterpolator());
+        //animSet.playTogether(a1, a2, ...); //两个动画同时执行
+        animSet.playTogether(a2, a1);//两个动画同时执行
+        animSet.play(a3).before(a2); //先后执行
+        animSet.start();
+    }
+
 
     /**
      * 顺序执行动画
@@ -179,21 +212,134 @@ public class AnimationUtil {
         if (interpolator == null) {
             interpolator = new CycleInterpolator(9);//Cycle循环插值器 从-1倍变换到1倍，参数为循环多少次
             interpolator = new LinearInterpolator();//线性插值器 从from变换线性(等差数列)到to
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-                //The Path must start at (0,0) and end at (1,1)    The Path cannot loop back on itself.
-                Path path = new Path();
-                path.reset();
-                path.moveTo(0, 0);
-                path.lineTo(1,1);
-                path.lineTo(-1,-1);
-                path.lineTo(1,1);
-                //主要给属性动画使用  view动画会报异常
-                interpolator = new PathInterpolator(path);
-            }
         }
         translateAnimation.setInterpolator(interpolator);
         view.startAnimation(translateAnimation);
+    }
+
+
+    /**
+     * PathInterpolator
+     *
+     * @param view
+     */
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public static void testPathObjectAnim(View view) {
+//        Path path = new Path();
+//        path.cubicTo(0.2f, 0f, 0.1f, 1f, 0.5f, 1f);
+//        path.lineTo(1,1);
+//        ObjectAnimator animator = ObjectAnimator.ofFloat(view, View.TRANSLATION_X, 500);
+//        animator.setInterpolator(PathInterpolatorCompat.create(path));
+//        animator.start();
+
+        Path path = new Path();
+        path.moveTo(100, 100);
+        path.quadTo(1000, 300, 300, 700);
+
+        //ObjectAnimator：继承自ValueAnimator，允许你指定要进行动画的对象以及该对象 的一个属性。
+        ObjectAnimator animator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
+        animator.setDuration(3000);
+        animator.start();
+
+    }
+
+    public static void propertyValuesHolder(View view) {
+        //PropertyValuesHolder：多属性动画同时工作管理类。有时候我们需要同时修改多个属性，那就可以用到此类
+        PropertyValuesHolder a1 = PropertyValuesHolder.ofFloat("alpha", 1, 0, 1);
+        PropertyValuesHolder a2 = PropertyValuesHolder.ofFloat("scaleX", 1, 0, 1);
+        PropertyValuesHolder a3 = PropertyValuesHolder.ofFloat("scaleY", 1, 0.5F, 1);
+        PropertyValuesHolder a4 = PropertyValuesHolder.ofFloat("translationX", 0, 50, 0);
+        ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(view, a1, a2, a3, a4);
+        animator.setDuration(3000);
+        animator.start();
+    }
+
+    /**
+     * Drawable Animation（Drawable动画）使用详解  真实父类就是Drawable。
+     * Drawable动画其实就是Frame动画（帧动画），它允许你实现像播放幻灯片一样的效果，这种动画的实质其实是Drawable，所以这种动画的XML定义方式文件一般放在res/drawable/目录下。
+     * 特别注意，AnimationDrawable的start()方法不能在Activity的onCreate方法中调运，因为AnimationDrawable还未完全附着到window上，所以最好的调运时机是onWindowFocusChanged()方法中。
+     */
+    public static void loading3PointsMove(ImageView rocketImage) {
+        rocketImage.setBackgroundResource(R.drawable.animations_loading_3_points);
+
+        AnimationDrawable rocketAnimation = (AnimationDrawable) rocketImage.getBackground();
+        rocketAnimation.start();
+    }
+
+
+    /***
+     * Property Animation（属性动画）使用详解
+     * 其实可以看见，属性动画的实现有7个类，进去粗略分析可以发现，好几个是hide的类，而其他可用的类继承关系又如下：
+     *  Animator 子类有 ValueAnimator AnimatorSet
+     *  ValueAnimator 子类有 TimeAnimator  ObjectAnimator
+     *    ViewPropertyAnimator
+     */
+    public static void textChangeAnimator(TextView view) {
+        //ValueAnimator：属性动画中的时间驱动，管理着动画时间的开始、结束属性值，相应时间属性值计算方法等。
+        final ValueAnimator animator = ValueAnimator.ofInt(0, 100);
+        animator.setDuration(5000);
+        animator.setInterpolator(new AccelerateInterpolator());
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                /**
+                 * 通过这样一个监听事件，我们就可以获取
+                 * 到ValueAnimator每一步所产生的值。
+                 *
+                 * 通过调用getAnimatedValue()获取到每个时间因子所产生的Value。
+                 * */
+                Integer value = (Integer) animation.getAnimatedValue();
+                view.setText(value + "");
+            }
+        });
+        animator.start();
+    }
+
+
+    /***
+     * Property Animation（属性动画）使用详解
+     * 其实可以看见，属性动画的实现有7个类，进去粗略分析可以发现，好几个是hide的类，而其他可用的类继承关系又如下：
+     *  Animator 子类有 ValueAnimator AnimatorSet
+     *  ValueAnimator 子类有 TimeAnimator  ObjectAnimator
+     *    ViewPropertyAnimator
+     */
+    public static void textChangeTimeAnimator(TextView view) {
+        //ValueAnimator：属性动画中的时间驱动，管理着动画时间的开始、结束属性值，相应时间属性值计算方法等。
+        final TimeAnimator animator =new TimeAnimator();
+        animator.setTimeListener(new TimeAnimator.TimeListener() {
+            @Override
+            public void onTimeUpdate(TimeAnimator animation, long totalTime, long deltaTime) {
+                view.setText(totalTime + "");
+            }
+        });
+        animator.start();
+    }
+
+    /**
+     * Evaluator 求值器
+     */
+    public static void textChangeEvaluator(TextView view) {
+
+        //ValueAnimator：属性动画中的时间驱动，管理着动画时间的开始、结束属性值，相应时间属性值计算方法等。
+        final ValueAnimator animator = ValueAnimator.ofInt(0, 50);
+        animator.setDuration(5000);
+//        animator.setInterpolator(new LinearInterpolator());
+        animator.setObjectValues(0, 50); //设置属性值类型
+        animator.setEvaluator(new IntEvaluator() {
+            @Override
+            public Integer evaluate(float fraction, Integer startValue, Integer endValue) {
+                //比如，这里实现的是， 返回数变化率和fraction的开方相同
+                return (int) (startValue + (endValue - startValue) * Math.sqrt(fraction));
+            }
+        });
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Integer value = (Integer) animation.getAnimatedValue();
+                view.setText(value + "");
+            }
+        });
+        animator.start();
     }
 
     /**

@@ -7,9 +7,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.MaskFilter;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
@@ -56,7 +58,54 @@ public class LoadingViewRing extends View {
 
         //drawHuaHua(canvas);
 
-        //渐变动画
+        drawRing(canvas); //渐变动画
+
+
+//        drawRingWithSweepGradient(canvas); //渐变动画
+
+    }
+
+    /**
+     * 需要动态设置起始颜色 十分麻烦
+     * @param canvas
+     */
+    private void drawRingWithSweepGradient(Canvas canvas){
+
+        //创建渐变
+        mPaint.setStrokeCap(Paint.Cap.BUTT);
+        mPaint.setShader(new Shader());
+        mPaint.setColor(Color.argb(255, 220, 220, 220));
+        canvas.drawCircle(mWidth / 2, mWidth / 2, mWidth / 2 - mPadding, mPaint);
+
+        float startColor = 220F + (startAngle % 360) * (220 - 180) / 120F;
+        float endColor = 220F - ((360 - startAngle) % 360) * (220 - 180) / 120F;
+//        int mMaxColors = Color.argb(255, 220, 220, 220);
+//        int mMinColors = Color.argb(255, 180, 180, 180);
+        int mMaxColors = Color.argb(255, (int) startColor, (int) startColor, (int) startColor);
+        int mMinColors = Color.argb(255, (int) endColor, (int) endColor, (int) endColor);
+        int degree = 120;
+        int[] mColors = {mMaxColors, mMinColors};
+        SweepGradient mSweepGradient = new SweepGradient(canvas.getWidth() / 2,
+                canvas.getHeight() / 2,
+                mColors,
+                new float[]{0f, degree / 360F - 0.017F});
+        // 从图肉眼不难观察出半个小圆大概占了6°的范围（刻度一格是6°）
+        // 6 / 360 = 0.017
+        //第一个元素为0表示从0°开始渐变，第二个元素表示渐变提前结束，最后的那一块是纯色。这样一来便可融为一体。
+        //旋转渐变
+        Matrix matrix = new Matrix();
+        matrix.setRotate(-90f, canvas.getWidth() / 2, canvas.getHeight() / 2);
+        mSweepGradient.setLocalMatrix(matrix);
+//        mPaint.setColor(mColors[1]);
+        //把渐变设置到笔刷
+        mPaint.setShader(mSweepGradient);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+        RectF rectF = new RectF(mPadding, mPadding, mWidth - mPadding, mWidth - mPadding);
+        canvas.drawArc(rectF, startAngle, degree, false, mPaint);//第四个参数是否显示半径
+    }
+
+    //渐变动画
+    private void drawRing(Canvas canvas) {
         mPaint.setStrokeCap(Paint.Cap.BUTT);
         mPaint.setColor(Color.argb(255, 219, 219, 219));
         canvas.drawCircle(mWidth / 2, mWidth / 2, mWidth / 2 - mPadding, mPaint);

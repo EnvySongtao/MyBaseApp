@@ -62,6 +62,7 @@ public class BaseActivity extends AppCompatActivity {
         return mSp;
     }
 
+
     /*************2019/4/3   今日头条适配 start ****************/
     public void stop(View view) {
         AutoSizeConfig.getInstance().stop(this);
