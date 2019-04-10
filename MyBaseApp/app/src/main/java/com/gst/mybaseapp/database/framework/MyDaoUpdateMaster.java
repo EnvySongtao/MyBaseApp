@@ -65,7 +65,7 @@ public class MyDaoUpdateMaster extends DaoMaster.OpenHelper {
     @Override
     public void onCreate(Database db) {
 //        DaoMaster. createAllTables(db, true);
-        
+
         createAllTables(db, false, NoteTestDao.class, LoginBuserNameDao.class, CreditCardDao.class);
     }
 
