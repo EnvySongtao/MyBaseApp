@@ -57,7 +57,8 @@ public class AppConfig {
     public static final int flag_takeCreditCard_Z = 0x519; // 信用卡正面照 requestCode
     public static final int flag_takeCreditCard_hold = 0x520;// 手持信用卡正面照 requestCode
 
-    public static final int flag_qh_id_card_front = 0x321;//自动识别身份证 正面 仅鼎刷有
-    public static final int flag_qh_id_card_back = 0x322;//自动识别身份证 正面 仅鼎刷有
-    public static final int flag_qh_id_card_hold = 0x323;//自动识别身份证 正面 仅鼎刷有
+    public static final int flag_qh_id_card_front = 0x321;//自动识别身份证
+    public static final int flag_qh_id_card_back = 0x322;//自动识别身份证
+    public static final int flag_qh_id_card_hold = 0x323;//自动识别身份证
+
 }

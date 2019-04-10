@@ -1,21 +1,19 @@
 package com.gst.mybaseapp.ui;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AnimationSet;
 import android.widget.TextView;
 
 import com.gst.mybaseapp.R;
 import com.gst.mybaseapp.base.AppConfig;
 import com.gst.mybaseapp.base.BaseActivity;
 import com.gst.mybaseapp.been.ShortUrl;
-import com.gst.mybaseapp.customView.CustomerAlertView;
 import com.gst.mybaseapp.customView.LoadingView;
+import com.gst.mybaseapp.database.DataBaseManager;
+import com.gst.mybaseapp.database.been.City;
 import com.gst.mybaseapp.net.AccountNetManager;
 import com.gst.mybaseapp.net.AccountNetManagerImpl;
 import com.gst.mybaseapp.net.interfaces.NetHelperInterface;
@@ -28,10 +26,13 @@ import com.gst.mybaseapp.utils.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class MainActivity extends BaseActivity {
+    private final static String TAG = "MainActivity";
 
     private String customerId = "";
 
@@ -40,10 +41,70 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        testNetwork();
-        testAnim();
+//        testAnim();
+        testDataBase();
         Log.i(TAG, "onCreate: ");
     }
 
+
+    List<String> list = null;
+
+    private void testDataBase() {
+        TextView tv_show = (TextView) findViewById(R.id.tv_show);
+        TextView tv_show1 = (TextView) findViewById(R.id.tv_show1);
+        TextView tv_show2 = (TextView) findViewById(R.id.tv_show2);
+        TextView tv_show3 = (TextView) findViewById(R.id.tv_show3);
+        TextView tv_show4 = (TextView) findViewById(R.id.tv_show4);
+        tv_show.setText("getAllProvices");
+        tv_show1.setText("updateProvicesAndAreas");
+        tv_show2.setText("getAreaCode(\"四川\", \"遂宁\")");
+        tv_show3.setText("getAllLoginNames");
+        tv_show4.setText("getDataBaseInfo");
+
+        tv_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list = DataBaseManager.getInstance().getAllProvices();
+                Log.i(TAG, "onClick: getAllProvices.size() = " + list.size());
+            }
+        });
+        tv_show1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (list == null) list = DataBaseManager.getInstance().getAllProvices();
+                Map<String, List<String>> areasMap = new HashMap<>();
+                DataBaseManager.getInstance().updateProvicesAndAreas(areasMap, list);
+                Log.i(TAG, "onClick:areasMap.get(\"四川\").size() = " + (areasMap.get("四川") == null ? 0 : areasMap.get("四川").size()));
+            }
+        });
+
+        tv_show2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                City city = DataBaseManager.getInstance().getAreaCode("四川", "遂宁");
+                Log.i(TAG, "onClick:  city:" + city);
+            }
+        });
+
+
+        tv_show3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DataBaseManager.getInstance().clearAllLoginNames();
+                DataBaseManager.getInstance().saveBusername("aaaddd", "123456");
+                List<String> loginNames = DataBaseManager.getInstance().getAllLoginNames();
+                Log.i(TAG, "onClick: getAllLoginNames.size() = " + loginNames.size());
+            }
+        });
+
+        tv_show4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String infoString=DataBaseManager.getInstance().getDataBaseInfo();
+                Log.i(TAG, "onClick: infoString = " + infoString);
+            }
+        });
+    }
 
     private void testAnim() {
         TextView tv_show = (TextView) findViewById(R.id.tv_show);
@@ -211,8 +272,6 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
-
-    private final static String TAG = "MainActivity";
 
     @Override
     protected void onRestart() {

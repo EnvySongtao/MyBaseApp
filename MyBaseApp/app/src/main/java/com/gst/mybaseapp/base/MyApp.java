@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
+
+import com.gst.mybaseapp.database.DataBaseManager;
 
 import java.util.Locale;
 
@@ -27,11 +30,24 @@ public class MyApp extends Application {
         super.onCreate();
         ourInstance = MyApp.this;
         initAutoSize();
+        initUtilsWithNoUiTread();
+    }
+
+    /**
+     * 非主线程初始化数据
+     */
+    private void initUtilsWithNoUiTread() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                DataBaseManager.initCityDb(MyApp.this);
+                Log.e("MyApp ", "DataBaseManager.initCityDb(MyApp.this) successfully");
+            }
+        }).start();
     }
 
 
     private void initAutoSize() {
-
         // TODO: 2018/12/11 0011 今日头条屏幕适配
         /**
          * 以下是 AndroidAutoSize 可以自定义的参数, {@link AutoSizeConfig} 的每个方法的注释都写的很详细

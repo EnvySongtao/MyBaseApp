@@ -41,7 +41,13 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        //弱应用 可以不去掉引用
         MyComponentsManager.getInstance().setCurrentActivity(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     protected void sendMessage(Handler handler, int what, Object obj) {

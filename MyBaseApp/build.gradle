@@ -9,7 +9,8 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath 'com.novoda:bintray-release:0.8.0'//今日头条适配
-        classpath 'io.objectbox:objectbox-gradle-plugin:2.3.1'//objectbox 是greendao团队推出的新框架 据说速度特别快
+        classpath 'io.objectbox:objectbox-gradle-plugin:2.3.1'//objectbox 是greendao团队推出的新框架 据说速度特别快 不支持读外部数据库
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

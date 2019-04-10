@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'io.objectbox'
+apply plugin: 'org.greenrobot.greendao'
+
+greendao {
+    schemaVersion 1
+}
 
 android {
     compileSdkVersion 28
@@ -55,8 +59,7 @@ dependencies {
     //fastjson jsonString 转化为对象
     //    implementation 'com.alibaba:fastjson:1.2.56'
     implementation 'com.google.code.gson:gson:2.8.5'
-    //    implementation 'org.greenrobot:greendao:3.2.2'
-    implementation 'org.greenrobot:objectbox-daocompat:2.3.1'
+    implementation 'org.greenrobot:greendao:3.2.2'
     //方法数多于 56K
     implementation 'com.android.support:multidex:1.0.3'
     implementation files('libs/BASE64.jar')
