@@ -68,4 +68,5 @@ dependencies {
     implementation project(':cameraLib')
     //动画框架
     //implementation 'com.airbnb.android:lottie:3.0.0'
+    implementation 'com.google.zxing:zxingorg:3.3.3'
 }

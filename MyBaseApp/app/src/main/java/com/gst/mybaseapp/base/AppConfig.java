@@ -61,4 +61,8 @@ public class AppConfig {
     public static final int flag_qh_id_card_back = 0x322;//自动识别身份证
     public static final int flag_qh_id_card_hold = 0x323;//自动识别身份证
 
+    /***************************** webview常用操作术语***************************************/
+    public static final String ASSET_LOAD_PATH ="file:///android_asset/";//webView调用网页的方法 如javascript:showInfoFromApp()
+    public static final String WEB_WIEW_JAVASCRIPT="javascript:";//webView调用网页的方法 如javascript:showInfoFromApp()
+
 }

@@ -1,10 +1,16 @@
 package com.gst.mybaseapp.ui;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.gst.mybaseapp.R;
@@ -17,8 +23,11 @@ import com.gst.mybaseapp.database.been.City;
 import com.gst.mybaseapp.net.AccountNetManager;
 import com.gst.mybaseapp.net.AccountNetManagerImpl;
 import com.gst.mybaseapp.net.interfaces.NetHelperInterface;
+import com.gst.mybaseapp.net.webview.JSProtocolInterface;
+import com.gst.mybaseapp.net.webview.JsInterface;
 import com.gst.mybaseapp.utils.AnimationUtil;
 import com.gst.mybaseapp.utils.DeviceUtil;
+import com.gst.mybaseapp.utils.FileUtil;
 import com.gst.mybaseapp.utils.JsonUtil;
 import com.gst.mybaseapp.utils.NetHelper;
 import com.gst.mybaseapp.utils.StringUtils;
@@ -26,6 +35,7 @@ import com.gst.mybaseapp.utils.StringUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,21 +45,137 @@ public class MainActivity extends BaseActivity {
     private final static String TAG = "MainActivity";
 
     private String customerId = "";
+    List<String> list = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 //        testNetwork();
 //        testAnim();
-        testDataBase();
+//        testDataBase();
+        testWebView();
+//        testReadTxt();
         Log.i(TAG, "onCreate: ");
     }
 
+    /**
+     * 读取文件中的数据
+     */
+    private void testReadTxt() {
+        setContentView(R.layout.act_btn_text_layout);
 
-    List<String> list = null;
+        EditText et1 = (EditText) findViewById(R.id.et1);
+        EditText et2 = (EditText) findViewById(R.id.et2);
+        Button btn1 = (Button) findViewById(R.id.btn1);
+        Button btn2 = (Button) findViewById(R.id.btn2);
+        Button btn3 = (Button) findViewById(R.id.btn3);
+        Button btn4 = (Button) findViewById(R.id.btn4);
+        TextView tv_result = (TextView) findViewById(R.id.tv_result);
 
+        StringBuilder stringBuilder = new StringBuilder();
+        btn1.setText("getString");
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int start = 0, len = 4;
+                try {
+                    start = Integer.parseInt(et1.getText().toString().trim());
+                    len = Integer.parseInt(et2.getText().toString().trim());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                stringBuilder.delete(0, stringBuilder.length());
+                stringBuilder.append(FileUtil.getString(AppConfig.ASSET_LOAD_PATH + "800sentences7000words.txt", start, len));
+                tv_result.setText(stringBuilder);
+            }
+        });
+
+        btn2.setText("getStringByLines");
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                int start = 0, len = 4;
+                try {
+                    start = Integer.parseInt(et1.getText().toString().trim());
+                    len = Integer.parseInt(et2.getText().toString().trim());
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    return;
+                }
+                stringBuilder.delete(0, stringBuilder.length());
+                stringBuilder.append(FileUtil.getStringByLines(AppConfig.ASSET_LOAD_PATH + "800sentences7000words.txt", start, len));
+                tv_result.setText(stringBuilder);
+            }
+        });
+    }
+
+    /**
+     * webView test
+     */
+    private void testWebView() {
+        setContentView(R.layout.act_web_view);
+        WebView webView = (WebView) findViewById(R.id.wv_show);
+
+        findViewById(R.id.input_et).setVisibility(View.GONE);
+        findViewById(R.id.tv_title1).setVisibility(View.GONE);
+        findViewById(R.id.tv_title2).setVisibility(View.GONE);
+        findViewById(R.id.btn_invoke_js).setVisibility(View.GONE);
+        findViewById(R.id.btn_invoke_js2).setVisibility(View.GONE);
+        webView.loadUrl(AppConfig.ASSET_LOAD_PATH + "protocol.html");
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setSaveEnabled(false);
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                view.loadUrl(url);
+                return true;
+            }
+        });
+        webView.addJavascriptInterface(new JSProtocolInterface(this,webView), "openAppView");
+
+//        webView.loadUrl(AppConfig.ASSET_LOAD_PATH + "testVM.html");
+
+//        webView.loadUrl(AppConfig.ASSET_LOAD_PATH + "javaScriptTest.html");
+//
+//        //在js中调用本地java方法
+//        webView.getSettings().setJavaScriptEnabled(true);
+//        //添加客户端支持
+//        webView.setWebChromeClient(new WebChromeClient());
+//        webView.addJavascriptInterface(new JsInterface(this), "AndroidWebView");
+//
+//        //添加客户端支持
+//        webView.setWebChromeClient(new WebChromeClient());
+//
+//        //App调用JS代码
+//        findViewById(R.id.btn_invoke_js).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String msg = ((EditText) findViewById(R.id.input_et)).getText().toString();
+//                //调用js中的函数：showInfoFromApp(msg)
+////                webView.loadUrl("javascript:showInfoFromApp('" + msg + "')");
+//                Log.i(TAG, "javascript:showInfoFromApp(\"" + msg + "\")");
+//                webView.loadUrl("javascript:showInfoFromApp(\"" + msg + "\")");
+//            }
+//        });
+//        //App调用JS代码
+//        findViewById(R.id.btn_invoke_js2).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                //调用js中的函数：showInfoFromApp()
+//                webView.loadUrl("javascript:showInfoFromApp()");
+//            }
+//        });
+    }
+
+
+    /**
+     * data base test
+     */
     private void testDataBase() {
+        setContentView(R.layout.activity_main);
         TextView tv_show = (TextView) findViewById(R.id.tv_show);
         TextView tv_show1 = (TextView) findViewById(R.id.tv_show1);
         TextView tv_show2 = (TextView) findViewById(R.id.tv_show2);
@@ -100,13 +226,17 @@ public class MainActivity extends BaseActivity {
         tv_show4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String infoString=DataBaseManager.getInstance().getDataBaseInfo();
+                String infoString = DataBaseManager.getInstance().getDataBaseInfo();
                 Log.i(TAG, "onClick: infoString = " + infoString);
             }
         });
     }
 
+    /**
+     * animations test
+     */
     private void testAnim() {
+        setContentView(R.layout.activity_main);
         TextView tv_show = (TextView) findViewById(R.id.tv_show);
         TextView tv_show1 = (TextView) findViewById(R.id.tv_show1);
         TextView tv_show2 = (TextView) findViewById(R.id.tv_show2);
@@ -182,7 +312,12 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+
+    /**
+     * network framework
+     */
     private void testNetwork() {
+        setContentView(R.layout.activity_main);
         TextView tv_show = (TextView) findViewById(R.id.tv_show);
         TextView tv_show1 = (TextView) findViewById(R.id.tv_show1);
         TextView tv_show2 = (TextView) findViewById(R.id.tv_show2);
