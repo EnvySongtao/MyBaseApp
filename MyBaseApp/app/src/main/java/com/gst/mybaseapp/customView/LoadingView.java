@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -46,7 +47,7 @@ public class LoadingView {
     }
 
 
-    public static void showInUIThread(Context context, Activity ownerActivity, String message, boolean canCancel) {
+    public static void showInUIThread(final Context context, final Activity ownerActivity, final String message, final boolean canCancel) {
 
         if (sDialog != null) {
             dismiss();

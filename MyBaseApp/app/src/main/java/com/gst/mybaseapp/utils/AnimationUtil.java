@@ -274,7 +274,7 @@ public class AnimationUtil {
      *  ValueAnimator 子类有 TimeAnimator  ObjectAnimator
      *    ViewPropertyAnimator
      */
-    public static void textChangeAnimator(TextView view) {
+    public static void textChangeAnimator(final TextView view) {
         //ValueAnimator：属性动画中的时间驱动，管理着动画时间的开始、结束属性值，相应时间属性值计算方法等。
         final ValueAnimator animator = ValueAnimator.ofInt(0, 100);
         animator.setDuration(5000);
@@ -303,7 +303,7 @@ public class AnimationUtil {
      *  ValueAnimator 子类有 TimeAnimator  ObjectAnimator
      *    ViewPropertyAnimator
      */
-    public static void textChangeTimeAnimator(TextView view) {
+    public static void textChangeTimeAnimator(final TextView view) {
         //ValueAnimator：属性动画中的时间驱动，管理着动画时间的开始、结束属性值，相应时间属性值计算方法等。
         final TimeAnimator animator =new TimeAnimator();
         animator.setTimeListener(new TimeAnimator.TimeListener() {
@@ -318,7 +318,7 @@ public class AnimationUtil {
     /**
      * Evaluator 求值器
      */
-    public static void textChangeEvaluator(TextView view) {
+    public static void textChangeEvaluator(final TextView view) {
 
         //ValueAnimator：属性动画中的时间驱动，管理着动画时间的开始、结束属性值，相应时间属性值计算方法等。
         final ValueAnimator animator = ValueAnimator.ofInt(0, 50);

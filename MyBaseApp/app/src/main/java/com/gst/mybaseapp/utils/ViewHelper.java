@@ -1,6 +1,7 @@
 package com.gst.mybaseapp.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.WindowManager;
 
 /**
@@ -47,4 +48,26 @@ public class ViewHelper {
         return wm.getDefaultDisplay().getHeight();
     }
 
+
+    /**
+     * 使用dimen适配时计算px
+     * @param context
+     * @param name 注意 鼎刷的name 前面要加上 d
+     * @return
+     */
+    public static int dimen2px(Context context, String name) {
+        try {
+            int resId = context.getResources().getIdentifier(name, "dimen", context.getPackageName());
+            return context.getResources().getDimensionPixelSize(resId);
+        } catch (Resources.NotFoundException e) {
+            return 0;
+        }
+    }
+
+    /**
+     * 使用dimen适配时计算px
+     */
+    public static int dimen2px(Context context, int dimen) {
+        return dimen2px(context, "d" + dimen);//<dimen name="d237">237.0dp</dimen>的情况
+    }
 }

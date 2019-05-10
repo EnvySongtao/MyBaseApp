@@ -113,7 +113,7 @@ public class DataBaseManager implements DataBaseManagerImpl {
     public void updateProvicesAndAreas(Map<String, List<String>> areaMap, List<String> allProvices) {
         areaMap.clear();
         for (String proStr : allProvices) {
-            areaMap.put(proStr, new ArrayList<>());
+            areaMap.put(proStr, new ArrayList<String>());
         }
         Cursor cexecQuery = null;
         try {

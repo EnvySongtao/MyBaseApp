@@ -13,13 +13,15 @@
 		/* -webkit-text-stroke:描边 */
 		p{color:rgb(42,42,42)}
 		/*font: px-像素  ;font-size:5vw-屏幕宽，5vh-屏幕高   text-indent 首行缩进*/
-		p.p1 {margin:0px;padding:0px; text-align: center; text-indent: 0vw; line-height: 6vw; font-size:4.6vw;font: 'Songti SC'; -webkit-text-stroke: #000000}
-		p.p2 {margin:0px;padding:0px; padding-left: 1.5vw; padding-right: 1.0vw; text-align: justify; text-indent: 8vw; line-height:5vw; font-size:4vw;font:'Times New Roman';-webkit-text-stroke: #000000}
-		p.p3 {margin:0px;padding:0px; text-align: center; text-indent: 3vw; line-height:3vw;font-size:2vw;font:'Times New Roman';-webkit-text-stroke: #000000}
-		p.p4 {margin-top:0vw;margin-left:0px;margin-right:0px;padding:0px; text-align: center; text-indent: 0vw; line-height:4vw;font-size:3vw;font:'Times New Roman';-webkit-text-stroke: #000000}
-		p.p6 {margin:0px;padding:0px; text-align: center; text-indent: 0vw; line-height:4vw; font-size:4vw;font: 'Songti SC'; -webkit-text-stroke: #000000}
-		p.bottom {margin:0px;padding:0px; text-align: center; text-indent: 0vw; line-height:28vw; font-size:4vw;font: 'Songti SC'; -webkit-text-stroke: #000000}
-		p.blank {margin:0px;padding:0px; text-align: center; text-indent: 0vw; line-height:1.5vw; font-size:1vw;font: 'Songti SC'; }
+		p.p1 {margin:0px;padding:0px; text-align: center; text-indent: 0vw; line-height: 6vw; font-size:4.6vw;font-family:'Microsoft YaHei'; -webkit-text-stroke: #000000}
+		p.p2 {margin:0px;padding:0px; padding-left: 4.2vw; padding-right:4vw; text-align: justify; text-indent: 3.3vw; line-height:5.5vw; font-size:3.3vw;font-family:'Microsoft YaHei';-webkit-text-stroke: #000000}
+		p.p3 {margin:0px;padding:0px; text-align: center; text-indent: 3vw; line-height:3vw;font-size:2vw;font-family:'Microsoft YaHei';-webkit-text-stroke: #000000}
+		p.p4 {margin-top:0vw;margin-left:0px;margin-right:0px;padding:0px; text-align: center; text-indent: 0vw; line-height:4vw;font-size:3vw;font-family:'Microsoft YaHei';-webkit-text-stroke: #000000}
+		p.p5 {margin:0px;padding:0px; padding-left: 4.2vw; padding-right:4vw; text-align: center; text-indent: 0vw; line-height:6.5vw; font-size:4vw;color:#005883;font-weight:700;font-family:'Microsoft YaHei';-webkit-text-stroke: #000000}
+		p.p6 {margin:0px;padding:0px; padding-left: 4.2vw; padding-right:4vw; text-align: center; text-indent: 0vw; line-height:6.5vw; font-size:4vw;font:'Times New Roman';-webkit-text-stroke: #000000}
+		p.p7 {margin:0px;padding:0px; text-align: center; text-indent: 0vw; line-height:4vw; font-size:4vw;font-family:'Microsoft YaHei'; -webkit-text-stroke: #000000}
+		p.bottom {margin:0px;padding:0px; text-align: center; text-indent: 0vw; line-height:19vw; font-size:4vw;font-family:'Microsoft YaHei'; -webkit-text-stroke: #000000}
+		p.blank {margin:0px;padding:0px; text-align: center; text-indent: 0.5vw; line-height:1vw; font-size:0.5vw;font-family:'Microsoft YaHei'; }
 		span.s1 {font-kerning: none}
 		span.s2 {font: 16.0px Times; font-kerning: none}
 		span.s3 {text-align: justify;}
@@ -30,8 +32,10 @@
 		/* div{margin:0px;padding:text-align: center;display:inline-block;} */
 
 		/*少了1.4个vm?  不然会出现底部滚动条*/
-		img.qr_code{margin-top:10vw;margin-bottom:1vw;margin-left:19.3vw;margin-right:19.3vw;padding:0px;text-align: center;width:60vw;height:60vw;}
+		img.qr_code{margin-top:10vw;margin-bottom:1vw;margin-left:29.3vw;margin-right:29.3vw;padding:0px;text-align: center;width:40vw;height:40vw;}
 		img.look_up{margin:0vw;padding:0px;padding-bottom:0.5vw;height:3.4vw;width:5vw;}
+		img.hzg_icon{margin-top:4vw;margin-bottom:1.5vw;margin-left:44.3vw;margin-right:44.3vw;padding:0px;text-align: center;width:10vw;height:10vw;}
+		img.hzg_header{margin-top:0px;margin-bottom:0px;padding:0px;text-align: center;width:100vw;}
 		.left {float: left;width: 40vw;height: 4vm;text-align: right;}
 		.right {margin-left: 40vw;height: 4vm;text-align: left;}
 
@@ -44,7 +48,9 @@
 
     </style>
     <script>
-		var qrCodeString = "http://pay.mastershop.cn/mps/regist/registNetWithNoCode?ncPackId=HG_GW_ZX1&lev2CustId=4000275255";
+		//var qrCodeString = "http://pay.mastershop.cn/mps/regist/registNetWithNoCode?ncPackId=HG_GW_ZX1&lev2CustId=4000275255";
+		//https://pay.dingshuapay.com/msoft/static/notices/hzg_download_coding/protocol.html
+		var qrCodeString = "https://pay.dingshuapay.com/msoft/static/notices/hzg_download_coding/qr_code.jpg";
 		var timeOutEvent=0;//定时器
 		//开始按
 		function gtouchstart(){
@@ -72,38 +78,46 @@
 		function longPress(){
 			timeOutEvent = 0;
 			//执行长按要执行的内容，如弹出菜单
-			window.openAppView.getHuiZhangGuiQrCode(qrCodeString,"com.qh.qhpay",false);
+			//window.openAppView.getHuiZhangGuiQrCode(qrCodeString,"com.qh.qhpay",false);
 			//"com.qh.qhpay" 应用包名，必须在应用宝上过线 不然会报网络异常
 			//window.openAppView.getHuiZhangGuiQrCode("","com.qh.qhpay",true);
+			window.openAppView.saveImg(qrCodeString,"慧掌柜MINI");
 		}
 
     </script>
 </head>
+
 <body>
-    <p style="margin:0px;padding:0px; line-height:3vw; font-size:1vw;">&nbsp;</p>
+<!-- style="margin:0px;padding:0px;background-image: url(hzg_download_bg.jpg);background-position: right bottom;background-size: cover;background-repeat: no-repeat;"-->
+<!-- <p style="margin:0px;padding:0px; line-height:3vw; font-size:1vw;">&nbsp;</p>
     <p class="p6"><span class="s1"><b>慧掌柜MINI</b></span></p>
     <p style="margin:0px;padding:0px; line-height:1.5vw; font-size:1vw;">&nbsp;</p>
-    <hr/>
-    <!--<hr style="size:2px;align:center;noshade #5151A2"/>-->
-    <p class="p3">&nbsp;</p>
-    <p class="p3">&nbsp;</p>
-    <p class="p1"><span class="s1"><b>应用推荐(慧掌柜MINI)</b></span></p>
-    <p class="p3">&nbsp;</p>
-    <p class="p2"><span class="s3">慧掌柜MINI是鼎刷团队推出的另一款实体中小型商户收款工具。支持一个店铺多收银员收款，并提供营收账本、会员管理、营销等功能帮助商户更方便的管理店铺信息。</span>
-    </p>
-    <p class="p2"><span class="s3">同时慧掌柜MINI还支持扫描终端收款。商户绑定终端成功后，无需通过APP,可直接通过扫描终端收款（支持支付宝、微信）。</span>
-    </p>
-    <p class="p2"><span class="s3">如需进一步了解，请扫描二维码下载慧掌柜MINI应用（如无推荐代理，注册扫码环节也扫描该二维码）</span></p>
-    <img class="qr_code" src="qr_code.jpg" alt="" ontouchstart="gtouchstart()"
-         ontouchmove="gtouchmove()" ontouchend="gtouchend()"/>
-    <!-- <div class=" left"><img class="look_up" src="look_up.png"/></div>
-    <div class="right"><p class="p4">&nbsp;&nbsp;下载APP&nbsp;&nbsp;&nbsp;注册扫描</p></div>
-    -->
-    <p class="p4"><span class="s1">&nbsp;&nbsp;</span><img class="look_up" src="look_up.png"
-                                                           align="absmiddle"><span class="s1">&nbsp;&nbsp;下载APP&nbsp;&nbsp;&nbsp;注册扫描</span>
-    </p>
-
-    <a href="http://pay.mastershop.cn/mps/regist/registNetWithNoCode?ncPackId=HG_GW_ZX1&lev2CustId=4000275255">跳转</a>
-    <p class="bottom">&nbsp;&nbsp;</p>
+    <hr/> -->
+<!--<hr style="size:2px;align:center;noshade #5151A2"/>-->
+<!-- <p class="p3">&nbsp;</p> -->
+<!-- <img class="hzg_icon" src="icon_hzg.png"/>
+    <p class="p1"><span class="s1"><b>慧掌柜</b></span></p>
+    <p class="p3">&nbsp;</p> -->
+<img class="hzg_header" src="header_bg.png"/>
+<p class="p2"><span class="s3">慧掌柜MINI是鼎刷团队推出的另一款实体中小型商户收款工具。支持POS收款、支付宝收款、微信收款，并提供多收银员收款，营收账本、会员管理、营销等功能帮助商户管理店铺。</span></p>
+<p class="blank">&nbsp;</p>
+<p class="p2"><span class="s3">商户完成认证、绑定扫描终端后，无需通过APP,可直接通过扫描终端收款【支持支付宝、微信】。</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p3">&nbsp;</p>
+<p class="p5"><span class="s3">——— 认证资料 ———</span></p>
+<p class="blank">&nbsp;</p>
+<p class="p6"><span class="s3">身份证、银行借记卡、营业执照、门店照片</span></p>
+<p class="blank">&nbsp;</p>
+<p class="p5"><span class="s3">【支付宝】【微信】收款费率低至0.38%&nbsp;&nbsp;&nbsp;</span></p>
+<p class="p3">&nbsp;</p>
+<p class="p3">&nbsp;</p>
+<p class="p2"><span class="s3">如需进一步了解，请扫描二维码下载慧掌柜MINI应用（注册时也扫描该二维码）</span></p>
+<img class="qr_code" src="qr_code.jpg" alt="" ontouchstart="gtouchstart()" ontouchmove="gtouchmove()" ontouchend="gtouchend()"/>
+<!-- <div class=" left"><img class="look_up" src="look_up.png"/></div>
+<div class="right"><p class="p4">&nbsp;&nbsp;下载APP&nbsp;&nbsp;&nbsp;注册扫描</p></div>
+-->
+<p class="p4"><span class="s1">&nbsp;&nbsp;</span><img class="look_up" src="look_up.png" align="absmiddle"><span class="s1">&nbsp;&nbsp;下载APP&nbsp;&nbsp;&nbsp;注册扫描</span>
+</p>
+<p class="bottom">&nbsp;&nbsp;</p>
 </body>
 </html>

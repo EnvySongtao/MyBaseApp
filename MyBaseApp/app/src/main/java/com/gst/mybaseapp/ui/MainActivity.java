@@ -53,8 +53,8 @@ public class MainActivity extends BaseActivity {
 //        testNetwork();
 //        testAnim();
 //        testDataBase();
-        testWebView();
-//        testReadTxt();
+//        testWebView();
+        testReadTxt();
         Log.i(TAG, "onCreate: ");
     }
 
@@ -64,20 +64,21 @@ public class MainActivity extends BaseActivity {
     private void testReadTxt() {
         setContentView(R.layout.act_btn_text_layout);
 
-        EditText et1 = (EditText) findViewById(R.id.et1);
-        EditText et2 = (EditText) findViewById(R.id.et2);
+        final EditText et1 = (EditText) findViewById(R.id.et1);
+        final EditText et2 = (EditText) findViewById(R.id.et2);
         Button btn1 = (Button) findViewById(R.id.btn1);
         Button btn2 = (Button) findViewById(R.id.btn2);
         Button btn3 = (Button) findViewById(R.id.btn3);
         Button btn4 = (Button) findViewById(R.id.btn4);
-        TextView tv_result = (TextView) findViewById(R.id.tv_result);
+        final TextView tv_result = (TextView) findViewById(R.id.tv_result);
 
-        StringBuilder stringBuilder = new StringBuilder();
+        final StringBuilder stringBuilder = new StringBuilder();
         btn1.setText("getString");
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int start = 0, len = 4;
+                Integer.parseInt(et1.getText().toString().trim());
                 try {
                     start = Integer.parseInt(et1.getText().toString().trim());
                     len = Integer.parseInt(et2.getText().toString().trim());
@@ -123,18 +124,19 @@ public class MainActivity extends BaseActivity {
         findViewById(R.id.tv_title2).setVisibility(View.GONE);
         findViewById(R.id.btn_invoke_js).setVisibility(View.GONE);
         findViewById(R.id.btn_invoke_js2).setVisibility(View.GONE);
-        webView.loadUrl(AppConfig.ASSET_LOAD_PATH + "protocol.html");
+//        webView.loadUrl(AppConfig.ASSET_LOAD_PATH + "protocol.html");
+        webView.loadUrl("https://www.baidu.com/");
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setSaveEnabled(false);
         webView.setWebChromeClient(new WebChromeClient());
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return true;
             }
         });
-        webView.addJavascriptInterface(new JSProtocolInterface(this,webView), "openAppView");
+        webView.addJavascriptInterface(new JSProtocolInterface(this, webView), "openAppView");
 
 //        webView.loadUrl(AppConfig.ASSET_LOAD_PATH + "testVM.html");
 

@@ -83,24 +83,26 @@ public class ToastUtil {
     }
 
 
-    private void instanceShow(CharSequence msg, int duration, int gravity, int time) {
-        MyApp.getInstance().runOnUiThread(() -> {
+    private void instanceShow(final CharSequence msg, final int duration, final int gravity, final int time) {
+        MyApp.getInstance().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                t.setText(msg);
 
-            t.setText(msg);
+                if (gravity > 0) {
+                    t.setGravity(gravity, 0, 0);
+                }
 
-            if (gravity > 0) {
-                t.setGravity(gravity, 0, 0);
+                if (duration == Toast.LENGTH_LONG || duration == Toast.LENGTH_SHORT) {
+                    t.setDuration(duration);
+                } else if (time > 0 && Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                    t.setDuration(time);
+                } else {
+                    t.setDuration(Toast.LENGTH_SHORT);
+                }
+
+                t.show();
             }
-
-            if (duration == Toast.LENGTH_LONG || duration == Toast.LENGTH_SHORT) {
-                t.setDuration(duration);
-            } else if (time > 0 && Build.VERSION.SDK_INT <= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                t.setDuration(time);
-            } else {
-                t.setDuration(Toast.LENGTH_SHORT);
-            }
-
-            t.show();
         });
     }
 
@@ -108,6 +110,11 @@ public class ToastUtil {
      * 保证主线程外 也可以弹出Toast
      */
     private void instanceShow() {
-        MyApp.getInstance().runOnUiThread(() -> t.show());
+        MyApp.getInstance().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                t.show();
+            }
+        });
     }
 }

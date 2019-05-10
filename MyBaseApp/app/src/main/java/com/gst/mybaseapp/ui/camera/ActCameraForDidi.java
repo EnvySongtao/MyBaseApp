@@ -76,8 +76,11 @@ public class ActCameraForDidi extends BaseActivity implements
                     showNext();
                     try {
                         mCameraMaskView.showPhoto((String) msg.obj);
-                        getBackgroundHandler().post(() -> {
-                            System.gc();
+                        getBackgroundHandler().post(new Runnable() {
+                            @Override
+                            public void run() {
+                                System.gc();
+                            }
                         });
                     } catch (OutOfMemoryError e) {
                         Runtime.getRuntime().gc();
@@ -228,7 +231,7 @@ public class ActCameraForDidi extends BaseActivity implements
     }
 
     //拍完照片后执行
-    protected void onPhotoTaken(CameraView cameraView, byte[] data) {
+    protected void onPhotoTaken(CameraView cameraView, final byte[] data) {
         LogUtils.d("IDFront拍到照片: " + data.length);
         getBackgroundHandler().post(new Runnable() {
             @Override

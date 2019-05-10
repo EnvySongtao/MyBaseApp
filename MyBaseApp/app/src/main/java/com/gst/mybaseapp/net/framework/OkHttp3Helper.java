@@ -287,7 +287,7 @@ public class OkHttp3Helper implements NetHelperInterface.HttpHelperImpl {
      * @param listener
      * @return
      */
-    public NetHelperInterface.IReq downloadFile(String url,int startsPoint, final NetHelperInterface.OnResponseListener listener) {
+    public NetHelperInterface.IReq downloadFile(String url, final int startsPoint, final NetHelperInterface.OnResponseListener listener) {
 
         Request request=new Request.Builder().url(url)
                 .addHeader("RANGE","bytes="+startsPoint+"-")
@@ -412,7 +412,7 @@ public class OkHttp3Helper implements NetHelperInterface.HttpHelperImpl {
     /*********************************** OKhttp 断点下载 end ***********************************/
 
     @NonNull
-    private NetHelperInterface.IReq getOkHttpClientIReq(NetHelperInterface.OnResponseListener listener, Request request) {
+    private NetHelperInterface.IReq getOkHttpClientIReq(final NetHelperInterface.OnResponseListener listener, Request request) {
         Call call = okHttpClient.newCall(request);
         OkRequest okRequest = new OkRequest(call);
 

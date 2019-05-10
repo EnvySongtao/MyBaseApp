@@ -427,9 +427,11 @@ public class BitmapUtils {
 
     public static void saveImageToGallery(Context context, Bitmap bmp, String fileName) {
         // 首先保存图片
-        File appDir = new File(Environment.getExternalStorageDirectory(), "QH");
+//        File appDir = new File(Environment.getExternalStorageDirectory(), "QH");
+        File appDir = new File(AppConfig.ImagePath);
         if (!appDir.exists()) {
-            appDir.mkdir();
+            boolean isSuccess = appDir.mkdirs();
+            Log.i( "saveImageToGallery: " ,"appDir.mkdirs():"+isSuccess);
         }
         //String fileName = System.currentTimeMillis() + ".jpg";
         fileName = fileName + ".jpg";
