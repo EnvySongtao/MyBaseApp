@@ -1,6 +1,5 @@
 package com.gst.mybaseapp.customView;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -13,8 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.gst.mybaseapp.R;
-import com.gst.mybaseapp.ui.MainActivity;
 
 
 /**
@@ -366,7 +366,7 @@ public class CustomerAlertView extends Dialog {
         public CustomerAlertView show() {
             CustomerAlertView dialog = create();
             dialog.setCancelable(cancalable);
-            if (!(context != null && context instanceof Activity && ((Activity) context).isFinishing())) {
+            if (!(context != null && context instanceof AppCompatActivity && ((AppCompatActivity) context).isFinishing())) {
                 //当前Activity 关闭 dialog不在弹出
                 dialog.show();
             }

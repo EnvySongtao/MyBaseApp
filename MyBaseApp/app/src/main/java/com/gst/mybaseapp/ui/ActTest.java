@@ -1,7 +1,7 @@
 package com.gst.mybaseapp.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.gst.mybaseapp.base.BaseActivity;
 

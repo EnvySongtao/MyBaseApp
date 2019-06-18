@@ -6,7 +6,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 import android.widget.Toast;
 
 import com.tencent.bugly.Bugly;

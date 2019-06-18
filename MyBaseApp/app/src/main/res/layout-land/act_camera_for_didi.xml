@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -38,14 +39,14 @@
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_marginBottom="50dp"
-            android:src="@drawable/camera_change"
+            app:srcCompat="@drawable/camera_change"
             android:visibility="gone" />
 
         <ImageView
             android:id="@+id/btn_take_photo"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:src="@drawable/camera_take" />
+            app:srcCompat="@drawable/camera_take" />
     </LinearLayout>
 
     <LinearLayout

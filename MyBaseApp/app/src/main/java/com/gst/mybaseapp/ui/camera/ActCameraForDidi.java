@@ -1,7 +1,6 @@
 package com.gst.mybaseapp.ui.camera;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -10,9 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -20,6 +16,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.cameraview.AspectRatio;
 import com.google.android.cameraview.CameraView;
@@ -118,7 +119,7 @@ public class ActCameraForDidi extends BaseActivity implements
      *
      * @param photoPath
      */
-    public static void actionStart(Activity activity, int requestCode, String photoPath, int maskFlag) {//, String whichPic, String picTip
+    public static void actionStart(AppCompatActivity activity, int requestCode, String photoPath, int maskFlag) {//, String whichPic, String picTip
         if (activity == null) return;
         Intent intent = new Intent(activity, ActCameraForDidi.class);
         intent.putExtra("photoPath", photoPath);

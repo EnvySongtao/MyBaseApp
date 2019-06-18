@@ -1,6 +1,5 @@
 package com.gst.mybaseapp.net.webview;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,22 +7,17 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.Target;
-import com.gst.mybaseapp.R;
-import com.gst.mybaseapp.base.AppConfig;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.gst.mybaseapp.customView.LoadingView;
 import com.gst.mybaseapp.utils.BitmapUtils;
 import com.gst.mybaseapp.utils.DownloadUtil;
 import com.gst.mybaseapp.utils.ToastUtil;
 
 import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.net.HttpURLConnection;
@@ -76,9 +70,9 @@ public class JSProtocolInterface {
      */
     @JavascriptInterface
     public void saveImg(String picUrl, String saveName) {
-        Activity context = null;
+        AppCompatActivity context = null;
         try {
-            context = (Activity) contextSoftReference.get();
+            context = (AppCompatActivity) contextSoftReference.get();
         } catch (Exception e) {
         }
         if (TextUtils.isEmpty(picUrl) || context == null) return;

@@ -17,12 +17,12 @@ android {
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.gst.mybaseapp"
-        minSdkVersion 16
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 3
         versionName "1.0.1.1"
         flavorDimensions "release"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true // 开启multidex
         ndk {
             //设置支持的SO库
@@ -55,30 +55,30 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
-//Android中导入依赖与版本不和的解决办法
-configurations.all {
-    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
-        def requested = details.requested
-        if (requested.group == 'com.android.support') {
-            if (!requested.name.startsWith("multidex")) {
-                details.useVersion '28.0.0'//28.0.0  25.2.0
-            }
-        }
-    }
-}
+//Android中导入依赖与版本不和的解决办法 换成androidX了
+//configurations.all {
+//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//        def requested = details.requested
+//        if (requested.group == 'com.android.support') {
+//            if (!requested.name.startsWith("multidex")) {
+//                details.useVersion '28.0.0'//28.0.0  25.2.0
+//            }
+//        }
+//    }
+//}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     //OKhttp3  3.13.1要求java 1.8
@@ -93,7 +93,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'org.greenrobot:greendao:3.2.2'
     //方法数多于 56K
-    implementation 'com.android.support:multidex:1.0.3'
     implementation files('libs/BASE64.jar')
     //自动适配屏幕
     implementation 'me.jessyan:autosize:1.1.2'
@@ -103,7 +102,7 @@ dependencies {
     implementation 'com.google.zxing:zxingorg:3.3.3'
 
     // 多dex配置
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.tencent.bugly:crashreport_upgrade:1.3.8'
 //    implementation 'com.tencent.bugly:crashreport:2.8.6'
     //1. 指定tinker依赖版本（注：应用升级1.3.5版本起，不再内置tinker）
@@ -111,4 +110,7 @@ dependencies {
     implementation 'com.tencent.tinker:tinker-android-lib:1.9.9'
     // walle（多渠道使用）
 //   implementation 'com.meituan.android.walle:library:1.1.3'
+
+    //全景图框架
+    implementation 'com.github.CN-ZPH:weibo360panorama:v1.0.1'
 }

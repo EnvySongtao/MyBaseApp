@@ -1,13 +1,13 @@
 package com.gst.mybaseapp.customView;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.os.Looper;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gst.mybaseapp.R;
 
@@ -38,16 +38,16 @@ public class LoadingView {
         return false;
     }
 
-    public static void show(Context context, Activity ownerActivity) {
+    public static void show(Context context, AppCompatActivity ownerActivity) {
         show(context, ownerActivity, context.getString(R.string.loading_view_normal_msg));
     }
 
-    public static void show(Context context, Activity ownerActivity, String message) {
+    public static void show(Context context, AppCompatActivity ownerActivity, String message) {
         showInUIThread(context, ownerActivity, message, true);
     }
 
 
-    public static void showInUIThread(final Context context, final Activity ownerActivity, final String message, final boolean canCancel) {
+    public static void showInUIThread(final Context context, final AppCompatActivity ownerActivity, final String message, final boolean canCancel) {
 
         if (sDialog != null) {
             dismiss();
@@ -84,12 +84,12 @@ public class LoadingView {
      * @param message
      * @param canCancel
      */
-    public static void show(Context context, Activity ownerActivity, String message, boolean canCancel) {
+    public static void show(Context context, AppCompatActivity ownerActivity, String message, boolean canCancel) {
         showInUIThread(context, ownerActivity, message, canCancel);
     }
 
 
-    public static void show(Context context, Activity ownerActivity, int resourceID) {
+    public static void show(Context context, AppCompatActivity ownerActivity, int resourceID) {
         String message = "";
         try {
             message = context.getString(resourceID);
@@ -99,7 +99,7 @@ public class LoadingView {
         show(context, ownerActivity, message);
     }
 
-    public static void showAlpha(Context context, Activity ownerActivity, float alpha) {
+    public static void showAlpha(Context context, AppCompatActivity ownerActivity, float alpha) {
         _alpha = alpha;
         show(context, ownerActivity);
     }
@@ -120,9 +120,9 @@ public class LoadingView {
         TextView text;
         LoadingViewRing lvr_show;
         String content;
-        Activity mOwnerActivity;
+        AppCompatActivity mOwnerActivity;
 
-        public MyDialog(Context context, Activity ownerActivity, String content) {
+        public MyDialog(Context context, AppCompatActivity ownerActivity, String content) {
             super(context, R.style.AppTheme_Dialog);
             this.mOwnerActivity = ownerActivity;
             this.content = content;

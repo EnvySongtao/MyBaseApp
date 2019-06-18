@@ -11,7 +11,7 @@
 
     <!-- QH -->
     <style name="AppTheme.Dialog" parent="android:Theme.Light">
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -32,18 +32,18 @@
         <item name="android:windowEnterAnimation">@anim/alpha0to1_point2outside_in</item>
         <item name="android:windowExitAnimation">@anim/alpha1to0_outside2point_out</item>
         <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
 
     <style name="common_line">
-        <item name="android:background">@color/primary_color_line</item>
+        <item name="background">@color/primary_color_line</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">0.5dp</item>
     </style>
 
     <style name="common_line_vertical">
-        <item name="android:background">@color/primary_color_line</item>
+        <item name="background">@color/primary_color_line</item>
         <item name="android:layout_width">0.5dp</item>
         <item name="android:layout_height">match_parent</item>
     </style>

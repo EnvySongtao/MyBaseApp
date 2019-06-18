@@ -1,8 +1,9 @@
 package com.gst.mybaseapp.utils;
 
-import android.app.Activity;
 import android.os.Handler;
 import android.os.Message;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.ref.SoftReference;
 
@@ -12,12 +13,12 @@ import java.lang.ref.SoftReference;
  * email: 157010607@qq.com
  */
 public class PreventLeakHandler extends Handler {
-    private SoftReference<Activity> activitySoftReference = null;
+    private SoftReference<AppCompatActivity> activitySoftReference = null;
 
     public PreventLeakHandler() {
     }
 
-    public void initContext(SoftReference<Activity> activitySoftReference) {
+    public void initContext(SoftReference<AppCompatActivity> activitySoftReference) {
         this.activitySoftReference = activitySoftReference;
     }
 

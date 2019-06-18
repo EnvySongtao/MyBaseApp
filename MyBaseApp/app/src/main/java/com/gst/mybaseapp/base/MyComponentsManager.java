@@ -1,6 +1,6 @@
 package com.gst.mybaseapp.base;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.lang.ref.WeakReference;
 
@@ -9,7 +9,7 @@ import java.lang.ref.WeakReference;
  * email: 157010607@qq.com
  */
 public class MyComponentsManager {
-    private WeakReference<Activity> sCurrentActivityWeakRef;
+    private WeakReference<AppCompatActivity> sCurrentActivityWeakRef;
     private static final MyComponentsManager ourInstance = new MyComponentsManager();
 
     public static MyComponentsManager getInstance() {
@@ -19,15 +19,15 @@ public class MyComponentsManager {
     private MyComponentsManager() {
     }
 
-    public Activity getCurrentActivity() {
-        Activity currentActivity = null;
+    public AppCompatActivity getCurrentActivity() {
+        AppCompatActivity currentActivity = null;
         if (sCurrentActivityWeakRef != null) {
             currentActivity = sCurrentActivityWeakRef.get();
         }
         return currentActivity;
     }
 
-    public void setCurrentActivity(Activity activity) {
+    public void setCurrentActivity(AppCompatActivity activity) {
         sCurrentActivityWeakRef = new WeakReference<>(activity);
     }
 

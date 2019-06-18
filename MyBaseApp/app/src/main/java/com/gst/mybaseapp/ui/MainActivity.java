@@ -25,6 +25,7 @@ import com.gst.mybaseapp.net.AccountNetManagerImpl;
 import com.gst.mybaseapp.net.interfaces.NetHelperInterface;
 import com.gst.mybaseapp.net.webview.JSProtocolInterface;
 import com.gst.mybaseapp.net.webview.JsInterface;
+import com.gst.mybaseapp.ui.aroundView.ActAroundView;
 import com.gst.mybaseapp.utils.AnimationUtil;
 import com.gst.mybaseapp.utils.DeviceUtil;
 import com.gst.mybaseapp.utils.FileUtil;
@@ -109,6 +110,11 @@ public class MainActivity extends BaseActivity {
                 stringBuilder.append(FileUtil.getStringByLines(AppConfig.ASSET_LOAD_PATH + "800sentences7000words.txt", start, len));
                 tv_result.setText(stringBuilder);
             }
+        });
+
+        btn3.setOnClickListener((v)->{
+            Intent intent=new Intent(MainActivity.this, ActAroundView.class);
+            startActivity(intent);
         });
     }
 

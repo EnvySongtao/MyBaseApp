@@ -2,7 +2,7 @@ package com.gst.mybaseapp.net.framework;
 
 
 import android.os.Environment;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.gst.mybaseapp.base.AppConfig;

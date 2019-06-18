@@ -41,7 +41,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!--bugly热更新 end-->
     <application
-        android:name=".base.MyApp"
+        android:name="com.gst.mybaseapp.base.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -49,9 +49,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--android:name=".ui.nfc.NfcAct"-->
+        <!--android:name=".ui.nfc.NfcAct"
+        .ui.MainActivity
+        -->
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.gst.mybaseapp.ui.MainActivity"
             android:configChanges="keyboard"
             android:launchMode="singleTop">
             <intent-filter>
@@ -69,14 +71,18 @@
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name=".ui.aroundView.ActAroundView"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale" />
+
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <!-- 如果您项目中的所有页面都只需要以高或宽中的一个作为基准进行适配的话, 那就只需要填写高或宽中的一个设计图尺寸即可 -->

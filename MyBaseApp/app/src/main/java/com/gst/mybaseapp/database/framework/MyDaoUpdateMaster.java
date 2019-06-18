@@ -2,7 +2,7 @@ package com.gst.mybaseapp.database.framework;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.gst.mybaseapp.database.been.CityDao;

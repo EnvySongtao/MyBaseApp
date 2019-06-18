@@ -1,6 +1,5 @@
 package com.gst.mybaseapp.utils;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -8,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gst.mybaseapp.base.AppConfig;
 
@@ -25,7 +26,7 @@ public class CommunicationUtil {
     /**
      * 通过蓝牙发送文件
      */
-    private void sendFile(Activity activity,String name) {
+    private void sendFile(AppCompatActivity activity, String name) {
         PackageManager localPackageManager = activity.getPackageManager();
         Intent localIntent = null;
 
